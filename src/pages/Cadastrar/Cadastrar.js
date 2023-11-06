@@ -34,6 +34,7 @@ function Cadastrar() {
 const addPost = data => axios.post("http://localhost:3000/cadastrar", data)
       .then(() => {
           console.log("Cadastrado com sucesso");
+          console.log(data);
           
       })
       .catch(() => {
@@ -41,38 +42,38 @@ const addPost = data => axios.post("http://localhost:3000/cadastrar", data)
           
       })
   
-      
 
-    // const [cep, setCep] = useState('');
-    // const [addressData, setAddressData] = useState({
-    //   rua: '',
-    //   bairro: '',
-    //   cidade: '',
-    //   estado: '',
-    // });
+    const [cep, setCep] = useState('');
+    const [addressData, setAddressData] = useState({
+      rua: '',
+      bairro: '',
+      cidade: '',
+      estado: '',
+    });
   
-    // const handleCepChange = (e) => {
-    //   const newCep = e.target.value;
-    //   setCep(newCep);
+    const handleCepChange = (e) => {
+      const newCep = e.target.value;
+      setCep(newCep);
   
       
-    //   if (newCep.length === 8) {
-    //     fetch(`https://viacep.com.br/ws/${newCep}/json/`)
-    //       .then((response) => response.json())
-    //       .then((data) => {
-    //         // console.log(data);
-    //         setAddressData({
-    //             rua: data.logradouro,
-    //             bairro: data.bairro,
-    //             cidade: data.localidade,
-    //             estado: data.uf,
-    //         });
-    //       })
-    //       .catch((error) => {
-    //         console.error('Erro ao consultar o CEP:', error);
-    //       });
-    //   }
-    // };
+      if (newCep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${newCep}/json/`)
+          .then((response) => response.json())
+          
+          .then((data) => {
+            
+            setAddressData({
+                bairro: data.bairro,
+                rua: data.logradouro,
+                cidade: data.localidade,
+                estado: data.uf,
+            });
+          })
+          .catch((error) => {
+            console.error('Erro ao consultar o CEP:', error);
+          });
+      }
+    };
 
 
  return (
@@ -106,15 +107,13 @@ const addPost = data => axios.post("http://localhost:3000/cadastrar", data)
 
                         <div className='filds'>
                             <label>Cep</label>
-                            {/* value={cep}  onChange={handleCepChange} */}
-                            <input type='text' name='cep' {...register("cep")}/>
+                            <input type='text' name='cep' {...register("cep")} value={cep}  onChange={handleCepChange}/>
                             <p className='error-message'>{errors.cep?.message}</p>
                         </div>
 
                         <div className='filds'>
                             <label>Rua</label>
-                            {/* value={addressData.rua} */}
-                            <input type='text' name='rua' {...register("rua")}  />
+                            <input type='text' name='rua' {...register("rua")} value={addressData.rua} />
                             <p className='error-message'>{errors.rua?.message}</p>
                         </div>
 
@@ -126,22 +125,19 @@ const addPost = data => axios.post("http://localhost:3000/cadastrar", data)
 
                         <div className='filds'>
                             <label>Bairro</label>
-                            {/* value={addressData.bairro} */}
-                            <input type='text' name='bairro' {...register("bairro")} />
+                            <input type='text' name='bairro' {...register("bairro")} value={addressData.bairro} />
                             <p className='error-message'>{errors.bairro?.message}</p>
                         </div>
 
                         <div className='filds'>
                             <label>Cidade</label>
-                            {/* value={addressData.cidade} */}
-                            <input type='text' name='cidade' {...register("cidade")} />
+                            <input type='text' name='cidade' {...register("cidade")}  value={addressData.cidade} />
                             <p className='error-message'>{errors.cidade?.message}</p>
                         </div>
 
                         <div className='filds'>
                             <label>Estado</label>
-                            {/* value={addressData.estado} */}
-                            <input type='text' name='estado' {...register("estado")} />
+                            <input type='text' name='estado' {...register("estado")} value={addressData.estado}/>
                             <p className='error-message'>{errors.estado?.message}</p>
                         </div>
 
