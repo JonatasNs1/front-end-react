@@ -55,7 +55,7 @@ function Feed() {
 
                <div className='lipe'></div>
                
-               <p>{post.idCadastroEmpresa}</p>
+               
                <p>{post.nome}</p>
                <p>{post.email}</p>
                <p>{post.senha}</p>
@@ -72,7 +72,7 @@ function Feed() {
 
                <div className='btns'>
                   <div className='btn-edit'>
-                     <Link  to={{ pathname: `/edit/${post._idCadastroEmpresa}` }}>
+                     <Link  to={{ pathname: `/edit/${post.idCadastroEmpresa}` }}>
                         <button>
          
                            edit

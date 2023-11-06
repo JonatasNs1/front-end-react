@@ -17,7 +17,7 @@ const validationPost = yup.object().shape({
     senha: yup.string().required('Campo obrigatório'),
     cep: yup.string().required('Campo obrigatório'),
     numero: yup.string().required('Campo obrigatório'),
-    telefone: yup.string().required('Campo obrigatório').max(10, 'Insira um numero valido').min(10, "Insira um numero valido"),
+    telefone: yup.string().required('Campo obrigatório').max(12, 'Insira um numero valido').min(12, "Insira um numero valido"),
     numeroEmpresa: yup.string().required('Campo obrigatório'),
     cnpj: yup.string().required('Campo obrigatório'),
     nomeEmpresa: yup.string().required('Campo obrigatório'),
@@ -63,10 +63,12 @@ const addPost = data => axios.post("http://localhost:3000/cadastrar", data)
           .then((data) => {
             
             setAddressData({
-                bairro: data.bairro,
-                rua: data.logradouro,
-                cidade: data.localidade,
-                estado: data.uf,
+                bairro: data.bairro ? data.bairro : 'Bairro não informado',
+                rua: data.logradouro ? data.logradouro : 'Rua não informado',
+                cidade: data.localidade ? data.localidade : 'Cidade não informado',
+                estado: data.uf ? data.uf : 'Estado não informado',
+                
+                
             });
           })
           .catch((error) => {
